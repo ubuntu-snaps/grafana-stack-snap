@@ -1,0 +1,5 @@
+#!/bin/sh -e
+
+if [ ! -d $SNAP_COMMON/conf ]; then
+    cp -r $SNAP/conf $SNAP_COMMON
+fi

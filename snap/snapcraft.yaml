@@ -1,0 +1,36 @@
+name: grafana-stack
+summary: Grafana Observability Stack
+description: Grafana Observability Stack
+version: "12.0.2"
+adopt-info: overlay
+
+base: core24
+grade: devel
+confinement: devmode
+
+platforms:
+  amd64:
+
+apps:
+  grafana:
+    command: bin/grafana server --config=$SNAP_COMMON/conf/grafana.ini --homepath=$SNAP
+    daemon: simple
+    plugs: [network, network-bind]
+
+parts:
+  grafana:
+    plugin: dump
+    source: https://dl.grafana.com/enterprise/release/grafana-enterprise-12.0.2.linux-amd64.tar.gz
+
+  overlay:
+    plugin: dump
+    source: overlay
+    build-packages:
+      - git
+    override-stage: |
+      craftctl default
+      craftctl set version="$(craftctl get version)+git$(git rev-parse --short HEAD)"
+
+layout:
+  /etc/grafana/:
+    bind: $SNAP_COMMON/etc
