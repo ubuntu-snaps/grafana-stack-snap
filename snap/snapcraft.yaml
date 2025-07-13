@@ -13,7 +13,7 @@ platforms:
 
 apps:
   grafana:
-    command: bin/grafana server --config=$SNAP_COMMON/conf/grafana.ini --homepath=$SNAP
+    command: bin/grafana server --config $SNAP_COMMON/conf/grafana.ini --homepath $SNAP
     daemon: simple
     plugs: [network, network-bind]
 
