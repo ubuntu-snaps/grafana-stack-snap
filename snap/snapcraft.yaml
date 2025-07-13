@@ -30,7 +30,3 @@ parts:
     override-stage: |
       craftctl default
       craftctl set version="$(craftctl get version)+git$(git rev-parse --short HEAD)"
-
-layout:
-  /etc/grafana/:
-    bind: $SNAP_COMMON/etc
